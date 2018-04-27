@@ -1,0 +1,53 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+
+    <div class="back-link"><a href="/books">В каталог</a></div>
+
+    {% if details|length %}
+        {% if details.in_stock %}
+            {% set in_stock__label = "На складе" %}
+            {% set in_stock__modifier = "in-stock" %}
+        {% else %}
+            {% set in_stock__label = "Нет в наличии" %}
+            {% set in_stock__modifier = "out-of-stock" %}
+        {% endif %}
+
+        <div class="book">
+            <div class="book__header">
+                <div class="book__name">{{ details.book_name }}</div>
+                <div class="book__in-stock book__in-stock_{{ in_stock__modifier }}">{{ in_stock__label }}</div>
+            </div>
+
+            <div class="book__content">
+                <div class="book__image">
+                    <img src="{{ details.image_medium }}" alt="{{ details.book_name }}"/>
+                </div>
+
+                <div class="book__details">
+                    <div class="book__id">ID товара: {{ details.id }}</div>
+                    <div class="book__isbn">ISBN: {{ details.isbn }}</div>
+                    <div class="book__author-list">Автор{% if ',' in details.author_list %}ы{% endif %}
+                        : {{ details.author_list }}</div>
+                    <div class="book__category">Категория: {{ details.category_name }}</div>
+                    <div class="book__publisher">Издательство: {{ details.publisher_name }}
+                        , {{ details.publishing_year }} г.
+                    </div>
+                    <div class="book__pages">Страниц: {{ details.page_number }}</div>
+
+                    <div class="book__price">Цена: {{ details.price|number_format(0) }} ₽</div>
+
+                    <button class="book__button-buy" onclick="addToCard({{ details.id }});">Купить</button>
+                </div>
+
+                <div class="book__description">
+                    <span class="book__annotation">Аннотация к книге "{{ details.book_name }}"</span>:<br/>
+                    {{ details.description|nl2br }}
+                </div>
+            </div>
+        </div>
+
+    {% else %}
+        Книга не найдена
+    {% endif %}
+{% endblock %}

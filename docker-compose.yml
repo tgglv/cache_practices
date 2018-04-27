@@ -1,0 +1,55 @@
+version: "3"
+
+services:
+  mysql:
+    build: ./mysql
+    command: mysqld
+    ports:
+      - "3306:3306"
+    restart: always
+    networks:
+      bookstore:
+        aliases:
+          - mysql
+
+  redis:
+    build: ./redis
+    ports:
+      - "6379:6379"
+    restart: always
+    sysctls:
+      - net.core.somaxconn=1024
+    networks:
+      bookstore:
+        aliases:
+          - redis
+
+  daemon:
+    build: ./daemon
+    depends_on:
+      - mysql
+      - redis
+    restart: always
+    networks:
+      bookstore:
+        aliases:
+          - daemon
+
+  store:
+    build: ./store
+    depends_on:
+      - mysql
+      - redis
+      - daemon
+    ports:
+      - "8080:8080"
+      - "9000:9000"
+    restart: always
+    networks:
+      bookstore:
+        aliases:
+          - nginx
+          - php-fpm
+
+networks:
+  bookstore:

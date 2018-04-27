@@ -1,0 +1,46 @@
+[
+  {
+    "hash_name": "cache:hash:book",
+    "single_key": false,
+    "dependencies": [
+      {
+        "table_name": "bookstore.books",
+        "primary_key": "id"
+      },
+      {
+        "table_name": "bookstore.publishers"
+      },
+      {
+        "table_name": "bookstore.categories"
+      },
+      {
+        "table_name": "bookstore.authors_books"
+      },
+      {
+        "table_name": "bookstore.authors"
+      }
+    ]
+  }
+,
+  {
+    "hash_name": "cache:hash:book_collection",
+    "single_key": true,
+    "dependencies": [
+      {
+        "table_name": "bookstore.books"
+      },
+      {
+        "table_name": "bookstore.publishers"
+      },
+      {
+        "table_name": "bookstore.categories"
+      },
+      {
+        "table_name": "bookstore.authors_books"
+      },
+      {
+        "table_name": "bookstore.authors"
+      }
+    ]
+  }
+]

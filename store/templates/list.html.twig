@@ -1,0 +1,20 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+    <div class="book-list">
+        {% for book in list %}
+            <div class="book-item">
+                <div class="book-item__image">
+                    <img src="{{ book.image_small }}" alt="{{ book.name }}"/>
+                </div>
+                <div class="book-item__details">
+                    <div class="book-item__name">{{ book.name }}</div>
+                    <div class="book-item__author-list">{{ book.author_list }}</div>
+                    <div class="book-item__publisher">{{ book.publisher }}, {{ book.publishing_year }} г.</div>
+                    <div class="book-item__price">{{ book.price|number_format(0) }} ₽</div>
+                    <button class="book-item__button-view" onclick="viewBook({{ book.id }});">Просмотр</button>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
