@@ -14,7 +14,8 @@
         "table_name": "bookstore.categories"
       },
       {
-        "table_name": "bookstore.authors_books"
+        "table_name": "bookstore.authors_books",
+        "primary_key": "id_book"
       },
       {
         "table_name": "bookstore.authors"
