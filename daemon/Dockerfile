@@ -1,4 +1,4 @@
-FROM cache_practices_daemon:latest
+FROM timurns/cache_practices_daemon:latest
 
 ENV DIR="/var/daemon" \
     MYSQL_HOST="mysql" \
